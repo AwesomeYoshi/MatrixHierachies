@@ -8,6 +8,8 @@ namespace ConsoleApp1
         public static int Main()
         {
             Game game = new Game();
+            SceneObject tankObject = new SceneObject();
+            SceneObject turrentObject = new SceneObject();
 
             // Initialization
             //--------------------------------------------------------------------------------------
@@ -27,7 +29,7 @@ namespace ConsoleApp1
                 game.Update();
                 // TODO: Update your variables here
                 //----------------------------------------------------------------------------------
-
+              
                 // Draw
                 //----------------------------------------------------------------------------------
                 game.Draw();

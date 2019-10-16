@@ -38,6 +38,8 @@ namespace ConsoleApp1
             float rotation = (float)Math.Atan2(globalTransform.m2, globalTransform.m1);
 
             Raylib.Raylib.DrawTextureEx(texture, new Vector2(globalTransform.m7, globalTransform.m8), rotation * (float)(180.0f / Math.PI), 1, Color.WHITE);
+
+            //rl.DrawPoly(, 2, 1, 1, Color.GREEN);
         }
     }
 }

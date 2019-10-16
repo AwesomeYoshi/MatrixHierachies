@@ -6,23 +6,26 @@ using Raylib;
 using rl = Raylib.Raylib;
 
 namespace ConsoleApp1
-{
+{ 
     class Game
     {
-        Stopwatch stopwatch = new Stopwatch();
 
+        Stopwatch stopwatch = new Stopwatch();
+       
         SceneObject tankObject = new SceneObject();
         SceneObject turrentObject = new SceneObject();
 
         SpriteObject tankSprite = new SpriteObject();
         SpriteObject turrentSprite = new SpriteObject();
 
+
         private long currentTime = 0;
         private long lastTime = 0;
         private float timer = 0;
         private int fps = 1;
         private int frames;
-
+        
+        
         private float deltaTime = 0.005f;
 
         public void Init()
@@ -31,7 +34,7 @@ namespace ConsoleApp1
             lastTime = stopwatch.ElapsedMilliseconds;
 
             tankSprite.Load("tankBlue_outline.png");
-            tankSprite.SetRotate(-90 * (float)(Math.PI / 180.0f));
+            tankSprite.SetRotate(-90 * (float)(Math.PI/180.0f));
             tankSprite.SetPosition(-tankSprite.Width / 2.0f, tankSprite.Height / 2.0f);
 
 
@@ -44,6 +47,8 @@ namespace ConsoleApp1
             tankObject.AddChild(turrentObject);
 
             tankObject.SetPosition(rl.GetScreenWidth()/2.0f, rl.GetScreenHeight()/2.0f);
+
+
         }
 
         public void Shutdown()
@@ -54,8 +59,8 @@ namespace ConsoleApp1
         public void Update()
         {
             currentTime = stopwatch.ElapsedMilliseconds;
-            deltaTime = (currentTime - lastTime) / 1000.0f;
-
+            deltaTime = (currentTime - lastTime) / 700.0f;
+            
             timer += deltaTime;
             if(timer>= 1)
             {
@@ -83,7 +88,8 @@ namespace ConsoleApp1
             }
             if(rl.IsKeyDown(KeyboardKey.KEY_S))
             {
-                Vector3 facing = new Vector3(tankObject.LocalTransform.m1, tankObject.LocalTransform.m2, 1) *
+                Vector3 facing = new Vector3(tankObject.LocalTransform.m1, 
+                                            tankObject.LocalTransform.m2, 1) *
                                             deltaTime * -100;
 
                 tankObject.Translate(facing.x, facing.y);
@@ -96,6 +102,11 @@ namespace ConsoleApp1
             {
                 turrentObject.Rotate(deltaTime);
             }
+            if(rl.IsKeyDown(KeyboardKey.KEY_SPACE))
+            {
+
+            }
+
             tankObject.Update(deltaTime);
 
             lastTime = currentTime;
