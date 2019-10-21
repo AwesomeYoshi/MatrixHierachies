@@ -17,6 +17,9 @@
     <None Update="barrelBlue.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="bulletGreenSilver_outline.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="raylib.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

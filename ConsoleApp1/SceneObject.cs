@@ -169,22 +169,6 @@ namespace ConsoleApp1
             m7 = 0; m8 = 0; m9 = 1;
         }
 
-        //public static Vector3 Min(Vector3 a, Vector3 b)
-        //{
-        //    return new Vector3(Math.Min(a.x, b.x), Math.Min(a.y, b.y), Math.Min(a.z, b.z));
-        //}
-
-        //public static Vector3 Max(Vector3 a, Vector3 b)
-        //{
-        //    return new Vector3(Math.Max(a.x, b.x), Math.Max(a.y, b.y), Math.Max(a.z, b.z));
-        //}
-
-        //public static Vector3 Clamp(Vector3 t, Vector3 a, Vector3 b)
-        //{
-        //    return Max(a, Min(b, t));
-        //}
-
-        
         public void Set(Matrix3 input)
         {
             m1 = input.m1;

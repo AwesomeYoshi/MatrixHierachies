@@ -14,9 +14,12 @@ namespace ConsoleApp1
        
         SceneObject tankObject = new SceneObject();
         SceneObject turrentObject = new SceneObject();
+        SceneObject bulletObject = new SceneObject();
+        SceneObject RootObject = new SceneObject();
 
         SpriteObject tankSprite = new SpriteObject();
         SpriteObject turrentSprite = new SpriteObject();
+        SpriteObject bulletSprite = new SpriteObject();
 
 
         private long currentTime = 0;
@@ -24,8 +27,8 @@ namespace ConsoleApp1
         private float timer = 0;
         private int fps = 1;
         private int frames;
-        
-        
+        private float bulletTime = 0;
+     
         private float deltaTime = 0.005f;
 
         public void Init()
@@ -37,18 +40,21 @@ namespace ConsoleApp1
             tankSprite.SetRotate(-90 * (float)(Math.PI/180.0f));
             tankSprite.SetPosition(-tankSprite.Width / 2.0f, tankSprite.Height / 2.0f);
 
+            bulletSprite.Load("bulletGreenSilver_outline.png");
+            bulletSprite.SetRotate(90 * (float)(Math.PI / 180.0f));
+            bulletSprite.imgScale = 0.5f;
 
             turrentSprite.Load("barrelBlue.png");
             turrentSprite.SetRotate(-90 * (float)(Math.PI / 180.0f));
             turrentSprite.SetPosition(0, turrentSprite.Width/ 2.0f);
 
+            bulletObject.AddChild(bulletSprite);
             turrentObject.AddChild(turrentSprite);
             tankObject.AddChild(tankSprite);
             tankObject.AddChild(turrentObject);
+           
 
             tankObject.SetPosition(rl.GetScreenWidth()/2.0f, rl.GetScreenHeight()/2.0f);
-
-
         }
 
         public void Shutdown()
@@ -102,14 +108,33 @@ namespace ConsoleApp1
             {
                 turrentObject.Rotate(deltaTime);
             }
-            if(rl.IsKeyDown(KeyboardKey.KEY_SPACE))
+            if(rl.IsKeyDown(KeyboardKey.KEY_SPACE) && bulletTime <= 0)
             {
+                turrentObject.AddChild(bulletObject);
+                bulletObject.SetPosition(65,-5.5f);
+                bulletObject.Update(deltaTime);
+                turrentObject.RemoveChild(bulletObject);
 
+                bulletObject.Update(deltaTime);
+                RootObject.AddChild(bulletObject);
+
+
+
+                bulletTime = 2;    
             }
 
-            tankObject.Update(deltaTime);
+             lastTime = currentTime;
 
-            lastTime = currentTime;
+            if(bulletTime > 0)
+            {
+                bulletTime -= deltaTime;
+                bulletSprite.Draw();
+                Vector3 facing = new Vector3(bulletObject.LocalTransform.m1,
+                            bulletObject.LocalTransform.m2, 1) *
+                            deltaTime * 100;
+
+                bulletObject.Translate(facing.x, facing.y);
+            }
         }
 
         public void Draw()
@@ -117,7 +142,7 @@ namespace ConsoleApp1
             rl.BeginDrawing();
 
             rl.ClearBackground(Color.WHITE);
-            rl.DrawText(fps.ToString(), 10, 10, 12, Color.RED);
+            rl.DrawText(fps.ToString(), 10, 10, 12, Color.DARKBLUE);
 
             tankObject.Draw();
 
