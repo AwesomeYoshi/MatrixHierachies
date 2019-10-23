@@ -186,7 +186,7 @@ namespace ConsoleApp1
         public void SetRotateZ(double radians)
         {
             Matrix3 rz = new Matrix3((float)Math.Cos(radians), (float)Math.Sin(radians), 0,
-                                     (float)-Math.Sin(radians), (float)Math.Cos(radians), 00,
+                                     (float)-Math.Sin(radians), (float)Math.Cos(radians), 0,
                                      0, 0, 1);
 
             Set(rz);

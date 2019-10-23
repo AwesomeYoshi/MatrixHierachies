@@ -65,7 +65,7 @@ namespace ConsoleApp1
         public void Update()
         {
             currentTime = stopwatch.ElapsedMilliseconds;
-            deltaTime = (currentTime - lastTime) / 700.0f;
+            deltaTime = (currentTime - lastTime) / 1000.0f;
             
             timer += deltaTime;
             if(timer>= 1)
@@ -108,17 +108,35 @@ namespace ConsoleApp1
             {
                 turrentObject.Rotate(deltaTime);
             }
-            if(rl.IsKeyDown(KeyboardKey.KEY_SPACE) && bulletTime <= 0)
+
+            float xR = turrentSprite.GlobalTransform.m1;
+            float yR = turrentSprite.GlobalTransform.m4;
+            float rot = (float)Math.Atan2(xR, yR);
+
+            if(rl.IsKeyPressed(KeyboardKey.KEY_SPACE))
             {
                 turrentObject.AddChild(bulletObject);
                 bulletObject.SetPosition(65,-5.5f);
                 bulletObject.Update(deltaTime);
+
+              
+
+                float xPos = bulletObject.GlobalTransform.m7;
+                float yPos = bulletObject.GlobalTransform.m8;
+
+                float xDir = xPos - turrentSprite.GlobalTransform.m7;
+                float yDir = yPos - turrentSprite.GlobalTransform.m8;
+
+                float mag = (float)Math.Sqrt(xDir * xDir + yDir * yDir);
+                xDir /= mag;
+                yDir /= mag;
                 turrentObject.RemoveChild(bulletObject);
 
-                bulletObject.Update(deltaTime);
-                RootObject.AddChild(bulletObject);
+                //bulletObject.Update(deltaTime);
+                //RootObject.AddChild(bulletObject);
 
-
+                bulletObject.SetRotate(rot);
+                bulletObject.SetPosition(xPos, yPos);
 
                 bulletTime = 2;    
             }
