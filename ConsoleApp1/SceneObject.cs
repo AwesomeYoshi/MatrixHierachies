@@ -15,6 +15,8 @@ namespace ConsoleApp1
         protected Matrix3 localTransform = new Matrix3();
         protected Matrix3 globalTransform = new Matrix3();
 
+        public bool active = true;
+
         public SceneObject Parent
         {
             get { return parent; }

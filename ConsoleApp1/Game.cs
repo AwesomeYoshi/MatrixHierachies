@@ -28,6 +28,7 @@ namespace ConsoleApp1
         private int fps = 1;
         private int frames;
         private float bulletTime = 0;
+        
      
         private float deltaTime = 0.005f;
 
@@ -118,7 +119,7 @@ namespace ConsoleApp1
                 turrentObject.AddChild(bulletObject);
                 bulletObject.SetPosition(65,-5.5f);
                 bulletObject.Update(deltaTime);
-
+                bulletObject.active = true;
               
 
                 float xPos = bulletObject.GlobalTransform.m7;
@@ -143,9 +144,14 @@ namespace ConsoleApp1
 
              lastTime = currentTime;
 
-            if(bulletTime > 0)
+            if(bulletObject.GlobalTransform.m7 > 795 || bulletObject.GlobalTransform.m7 < 5 || bulletObject.GlobalTransform.m8 > 445|| bulletObject.GlobalTransform.m8 < 5)
             {
-                bulletTime -= deltaTime;
+                bulletObject.active = false;
+            }
+
+            if(/*bulletTime > 0 && */bulletObject.active)
+            {
+                //bulletTime -= deltaTime;
                 bulletSprite.Draw();
                 Vector3 facing = new Vector3(bulletObject.LocalTransform.m1,
                             bulletObject.LocalTransform.m2, 1) *
