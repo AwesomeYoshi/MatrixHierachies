@@ -224,6 +224,7 @@ namespace ConsoleApp1
 
         public static Matrix3 operator *(Matrix3 lhs, Matrix3 rhs)
         {
+            //Column major
             return new Matrix3(
                 lhs.m1 * rhs.m1 + lhs.m4 * rhs.m2 + lhs.m7 * rhs.m3,
                 lhs.m2 * rhs.m1 + lhs.m5 * rhs.m2 + lhs.m8 * rhs.m3,

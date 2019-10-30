@@ -28,6 +28,7 @@ namespace ConsoleApp1
 
         }
 
+        //Load in a image sprite
         public void Load(string filename)
         {
             Image img = rl.LoadImage(filename);
@@ -37,8 +38,9 @@ namespace ConsoleApp1
         public override void OnDraw()
         {
             float rotation = (float)Math.Atan2(globalTransform.m2, globalTransform.m1);
-
-            Raylib.Raylib.DrawTextureEx(texture, new Vector2(globalTransform.m7, globalTransform.m8), rotation * (float)(180.0f / Math.PI), imgScale, Color.WHITE);
+            
+            //Changes the position, rotation, imagescale, and color of the sprite
+            Raylib.Raylib.DrawTextureEx(texture, new Vector2(globalTransform.m7, globalTransform.m8), rotation * (float)(180.0f / Math.PI), imgScale, Color.BLUE);
 
             
         }
